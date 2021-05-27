@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import styles from './ContactForm.module.css';
 
 class ContactForm extends Component {
   state = {
@@ -19,7 +20,7 @@ class ContactForm extends Component {
     event.preventDefault();
     const id = uuidv4();
 
-    this.props.onSubmit({id: id, ...this.state});
+    this.props.onSubmit({ id: id, ...this.state });
     this.reset();
   };
 
@@ -32,9 +33,10 @@ class ContactForm extends Component {
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>
+        <label className={styles.label}>
           Name
           <input
+            className={styles.input}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -45,9 +47,10 @@ class ContactForm extends Component {
           ></input>
         </label>
 
-        <label>
+        <label className={styles.label}>
           Number
           <input
+            className={styles.input}
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -58,7 +61,7 @@ class ContactForm extends Component {
           />
         </label>
 
-        <button type="submit">Add contact</button>
+        <button className={styles.button} type="submit">Add contact</button>
       </form>
     );
   }

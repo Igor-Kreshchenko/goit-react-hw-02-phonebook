@@ -5,6 +5,8 @@ import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
 import Filter from './components/Filter';
 
+import styles from './App.module.css';
+
 class App extends Component {
   state = {
     contacts: [
@@ -56,7 +58,7 @@ class App extends Component {
     const filteredContacts = this.filterContacts();
 
     return (
-      <>
+      <div className={styles.wrapper}>
         <Section title="Phonebook">
           <ContactForm onSubmit={this.formSubmitHandler} />
         </Section>
@@ -68,7 +70,7 @@ class App extends Component {
             onClick={this.deleteContact}
           />
         </Section>
-      </>
+      </div>
     );
   }
 }
