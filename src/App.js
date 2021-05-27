@@ -17,9 +17,15 @@ class App extends Component {
   };
 
   formSubmitHandler = contact => {
-    this.setState(prevState => ({
-      contacts: [contact, ...prevState.contacts],
-    }));
+    const { contacts } = this.state;
+    const { name } = contact;
+    const names = contacts.map(item => item.name);
+
+    names.includes(name)
+      ? alert(`${name} is already in contacts`)
+      : this.setState(prevState => ({
+          contacts: [contact, ...prevState.contacts],
+        }));
   };
 
   onChangeFilter = event => {
