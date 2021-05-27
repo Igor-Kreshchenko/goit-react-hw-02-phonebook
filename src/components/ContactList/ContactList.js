@@ -1,18 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ContactItem from './ContactItem';
-import { v4 as uuidv4 } from 'uuid';
 
-const ContactList = ({ contacts }) => {
+const ContactList = ({ contacts, onClick }) => {
   return (
     <ul>
       {contacts.map(contact => {
-        const { name, number } = contact;
-        const id = uuidv4();
+        const { id, name, number } = contact;
 
         return (
           <li key={id}>
-            <ContactItem name={name} number={number} />
+            <ContactItem
+              id={id}
+              name={name}
+              number={number}
+              onClick={onClick}
+            />
           </li>
         );
       })}
@@ -25,6 +28,7 @@ export default ContactList;
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       number: PropTypes.string.isRequired,
     }),

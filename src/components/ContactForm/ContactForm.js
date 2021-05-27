@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 class ContactForm extends Component {
   state = {
@@ -16,9 +17,9 @@ class ContactForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    const id = uuidv4();
 
-    this.props.onSubmit(this.state);
-
+    this.props.onSubmit({id: id, ...this.state});
     this.reset();
   };
 
