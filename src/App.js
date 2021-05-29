@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-
 import Section from './components/Section';
 import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
 import Filter from './components/Filter';
-
 import styles from './App.module.css';
 
 class App extends Component {
@@ -31,9 +29,9 @@ class App extends Component {
   };
 
   onChangeFilter = event => {
-    const inputValue = event.target.value;
+    const filterValue = event.target.value;
 
-    this.setState({ filter: inputValue });
+    this.setState({ filter: filterValue });
   };
 
   filterContacts = () => {
@@ -45,30 +43,31 @@ class App extends Component {
     );
   };
 
-  deleteContact = event => {
-    const targetId = event.target.id;
-
+  deleteContact = contactId => {
     this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== targetId),
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     }));
   };
 
   render() {
     const { filter } = this.state;
-    const filteredContacts = this.filterContacts();
+    const {
+      formSubmitHandler,
+      onChangeFilter,
+      deleteContact,
+      filterContacts,
+    } = this;
+    const filteredContacts = filterContacts();
 
     return (
       <div className={styles.wrapper}>
         <Section title="Phonebook">
-          <ContactForm onSubmit={this.formSubmitHandler} />
+          <ContactForm onSubmit={formSubmitHandler} />
         </Section>
 
         <Section title="Contacts">
-          <Filter value={filter} onChange={this.onChangeFilter} />
-          <ContactList
-            contacts={filteredContacts}
-            onClick={this.deleteContact}
-          />
+          <Filter value={filter} onChange={onChangeFilter} />
+          <ContactList contacts={filteredContacts} onClick={deleteContact} />
         </Section>
       </div>
     );

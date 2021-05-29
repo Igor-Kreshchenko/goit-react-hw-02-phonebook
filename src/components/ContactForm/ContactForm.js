@@ -9,7 +9,7 @@ class ContactForm extends Component {
   };
 
   handleChange = event => {
-    const { name, value } = event.currentTarget;
+    const { name, value } = event.target;
 
     this.setState({
       [name]: value,
@@ -21,18 +21,19 @@ class ContactForm extends Component {
     const id = uuidv4();
 
     this.props.onSubmit({ id: id, ...this.state });
-    this.reset();
+    this.resetForm();
   };
 
-  reset = () => {
+  resetForm = () => {
     this.setState({ name: '', number: '' });
   };
 
   render() {
     const { name, number } = this.state;
+    const { handleSubmit, handleChange } = this;
 
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label className={styles.label}>
           Name
           <input
@@ -43,7 +44,7 @@ class ContactForm extends Component {
             title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
             required
             value={name}
-            onChange={this.handleChange}
+            onChange={handleChange}
           ></input>
         </label>
 
@@ -57,11 +58,13 @@ class ContactForm extends Component {
             title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
             required
             value={number}
-            onChange={this.handleChange}
+            onChange={handleChange}
           />
         </label>
 
-        <button className={styles.button} type="submit">Add contact</button>
+        <button className={styles.button} type="submit">
+          Add contact
+        </button>
       </form>
     );
   }
