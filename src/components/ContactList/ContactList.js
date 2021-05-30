@@ -10,14 +10,13 @@ const ContactList = ({ contacts, onClick }) => {
         const { id, name, number } = contact;
 
         return (
-          <li className={styles.item} key={id}>
-            <ContactItem
-              id={id}
-              name={name}
-              number={number}
-              onClick={onClick}
-            />
-          </li>
+          <ContactItem
+            key={id}
+            name={name}
+            number={number}
+            onClick={onClick}
+            id={id}
+          />
         );
       })}
     </ul>
